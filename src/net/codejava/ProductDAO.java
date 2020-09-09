@@ -11,7 +11,7 @@ public class ProductDAO {
 	
 	
 	
-	private ProductDAO() {
+	public ProductDAO() {
 		data.add(new Product(1, "iPhone X", 999.99f));
 		data.add(new Product(2, "XBOX 360", 329.50f));
 	}
