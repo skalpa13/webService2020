@@ -22,7 +22,7 @@ import javax.ws.rs.core.Response;
 
 @Path("/products")
 public class ProductResource {
-	private ProductDAO dao = ProductDAO.getInstance();
+	private ProductDAO dao =  new ProductDAO();
 	
 	@GET //http://localhost:8080/restfulWebServiceCrudList/rest/products
 	@Produces(MediaType.APPLICATION_JSON)
