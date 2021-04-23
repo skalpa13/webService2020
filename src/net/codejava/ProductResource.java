@@ -25,7 +25,7 @@ public class ProductResource {
 	private ProductDAO dao = ProductDAO.getInstance();
 	
 	@GET //http://localhost:8080/restfulWebServiceCrudList/rest/products
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_XML)
 	public List<Product> list() {
 		return dao.listAll();
 	}
