@@ -32,11 +32,11 @@ public class ProductResource {
 	
 	@GET
 	@Path("{id}") //http://localhost:8080/restfulWebServiceCrudList/rest/products/1
-	
-	public Response searchProdById( int id) {
+	@Produces(MediaType.APPLICATION_XML)
+	public Response searchProdById(@PathParam("id") int id) {
 		Product product = dao.get(id);
 		if (product != null) {
-			return Response.ok(product).build();
+			return Response.ok(product, MediaType.APPLICATION_XML).build();
 		} else {
 			return Response.status(Response.Status.NOT_FOUND).build();
 		}
