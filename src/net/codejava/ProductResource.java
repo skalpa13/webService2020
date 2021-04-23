@@ -42,6 +42,10 @@ public class ProductResource {
 		}
 	}
 	
+	
+	
+	
+	
 	// source https://o7planning.org/fr/11203/restclient-un-debogueur-pour-restful-web-service
 	//Pour spécifier le type de données renvoyées, vous devez rédiger une application Client pour former des Requêtes (Request) personnalisées 
 	//et les envoyer au service web. 
@@ -52,7 +56,7 @@ public class ProductResource {
 	//https://addons.mozilla.org/fr/firefox/addon/rester/
 	//icone apparait dans barre d'outils sur la droite 
 	//permet de tester le detele , post , put
-
+//	Allow: GET, POST, HEAD
 		@DELETE // http://localhost:8080/restfulWebServiceCrudList/rest/products/2
 		@Path("{id}")
 		public Response delete(@PathParam("id") int id) {
@@ -64,32 +68,42 @@ public class ProductResource {
 		}
 	
 	//post -> crud create  http://localhost:8080/restfulWebServiceCrudList/rest/products (à insérer dans  add on mozilla url rested client )
+	/*in the body
+		{
+		    "name": "PRODUCT API",
+		    "price": 12
+		}*/
 	@POST 
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response add(Product product) throws URISyntaxException {
 		System.out.println("name: " +product.getName());
 		int newProductId = dao.add(product);
 		URI uri = new URI("/products/" + newProductId);
-		//System.out.println("uri: " +uri);
+		System.out.println("uri: " +uri);
 		return Response.created(uri).build();
 	}
 	
 	
-	@POST //État HTTP 405 – Méthode non autorisée http://localhost:8080/restfulWebServiceCrudList/rest/products/nomproduct/12
-	 @Path("{name}/{price}")
-	public Response add(@PathParam("name") String name,	@PathParam("price") float price) throws URISyntaxException
+	
+	
+	
+	
+	@POST // http://localhost:8080/restfulWebServiceCrudList/rest/products/nomprod/12.45  
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("{name}/{price}")
+	public Response add( @PathParam("name") String name,	@PathParam("price") float price) throws URISyntaxException
 	{
-	    Product product = new Product(12, name, price);
-		int newProductId = dao.add(product);
-		
-		 return Response.ok().header("id", newProductId).build();
+		Product product = new Product();
+		product.setName(name);
+	    product.setPrice(price);
+	    int newProductId = dao.add(product);
+		URI uri = new URI("/products/" + newProductId);
+		System.out.println("uri: " +uri);
+			
+	    return Response.created(uri).build();
 	}
-	
-	
-	
-	
-	
-	
+
+
 	
 	//put -> crud update http://localhost:8080/restfulWebServiceCrudList/rest/products/4
 	@PUT

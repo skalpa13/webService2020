@@ -5,7 +5,7 @@ import java.util.List;
 
 public class ProductDAO {
 	private static ProductDAO instance;
-	private static int id=3;
+	private static int id=3;//2 produits sont deja insere dans la liste id= 1 et id =2 (ligne 13 & 14)
 	
 	private static List<Product> data = new ArrayList<>();
 	
@@ -15,7 +15,7 @@ public class ProductDAO {
 	}
 	
 	private ProductDAO() {
-		
+		//pas d'instanciation possible ici de product 
 	}
 	
 	public static ProductDAO getInstance() {
@@ -30,8 +30,9 @@ public class ProductDAO {
 		return new ArrayList<Product>(data);
 	}
 	
+	
 	public int add(Product product) {
-		//int newId = data.size() + 1;
+		//int newId = data.size() + 1; si supression d'une data dans la liste risque de doublon d'id  
 		product.setId(id);
 		id++;
 		data.add(product);
